@@ -1,20 +1,29 @@
+'use client';
+
 import { DCard } from "@/components/Card";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { Account } from "@/services/types";
+import { useEffect, useState } from "react";
 
-export default async function Index() {
-  const cookieStore = cookies()
-  const supabase = createServerComponentClient({ cookies: () => cookieStore })
+export default function Page() {
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  
+  useEffect(() => {
+    fetch('/api/accounts')
+    .then((res) => res.json())
+    .then((data) => {
+      setAccounts(data);
+    });
+  }, []);
 
-  const { data: accounts } = await supabase.from("accounts").select();
   return (
     <div>
-    {
+      {
       accounts?.map(account => (
         <DCard
-        title={account.name}
-        linkLabel="Details"
-        details={account.amount}
+          key={account.id}
+          title={account.name}
+          linkLabel="Details"
+          details={account.amount}
         />
       ))
     }
