@@ -1,8 +1,7 @@
 import {createServerComponentClient} from '@supabase/auth-helpers-nextjs';
 import {cookies} from 'next/headers';
-
 import {cache} from 'react';
-import { Account } from './types';
+import { Transaction } from './types';
 
 export const createServerClient = cache(() => {
   const cookieStore = cookies();
@@ -11,29 +10,30 @@ export const createServerClient = cache(() => {
   });
 });
 
-export async function getList() {
+export async function getListByAccount(accountId: string| number) {
   const supabase = createServerClient();
-  const {data: accounts} = await supabase
-    .from('accounts')
-    .select('*');
-  return accounts;
+  const {data: transactions} = await supabase
+    .from('transactions')
+    .select()
+    .eq('account', accountId);
+  return transactions;
 }
 
 export async function getById(id: string | null) {
   const supabase = createServerComponentClient({cookies});
-  const {data: queries} = await supabase.from('accounts')
+  const {data: queries} = await supabase.from('transactions')
     .select()
     .eq('id', id);
   return queries![0];
 }
 
-export async function saveAccount(account: Account) {
+export async function saveAccount(transaction: Transaction) {
   const supabase = createServerComponentClient({cookies});
   const {data, error} = await supabase
-    .from('accounts')
+    .from('transactions')
     .insert([
       {
-        ...account
+        ...transaction
       }
     ])
     .select();
