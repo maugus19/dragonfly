@@ -3,9 +3,12 @@
 import { DCard } from "@/components/Card";
 import { Account } from "@/services/types";
 import { useEffect, useState } from "react";
-
+import { useRouter } from 'next/navigation'
+ 
+ 
 export default function Page() {
-  const [accounts, setAccounts] = useState<Account[]>([]);
+const router = useRouter()
+const [accounts, setAccounts] = useState<Account[]>([]);
   
   useEffect(() => {
     fetch('/api/accounts')
@@ -15,6 +18,10 @@ export default function Page() {
     });
   }, []);
 
+  const goToTransactions = (accountId: number) => {
+    router.push(`accounts/${accountId}`, { scroll: false })
+
+  }
   return (
     <div>
       {
@@ -24,6 +31,7 @@ export default function Page() {
           title={account.name}
           linkLabel="Details"
           details={account.amount}
+          redirect={()=>goToTransactions(account.id!)}
         />
       ))
     }

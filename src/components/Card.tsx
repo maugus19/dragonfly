@@ -12,10 +12,15 @@ type DCardProps = {
   details?: number | string,
   details2?: number | string,
   linkLabel: string,
-  callback?: () => {}
+  redirect: Function
 }
 
 export function DCard(props: DCardProps) {
+
+  const redirect = () => {
+    props.redirect()
+  }
+
   return (
     <Box sx={{ minWidth: 275 }} >
       <Card variant="outlined">
@@ -34,7 +39,7 @@ export function DCard(props: DCardProps) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={props.callback}>{props.linkLabel}</Button>
+          <Button size="small" onClick={redirect}>{props.linkLabel}</Button>
         </CardActions>
       </Card>
     </Box>
