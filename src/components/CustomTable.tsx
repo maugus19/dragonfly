@@ -9,10 +9,10 @@ import TableRow from '@mui/material/TableRow';
 import { useState } from 'react';
 
 interface Column {
-  id: 'name' | 'code' | 'population' | 'size' | 'density';
+  id: string;
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: 'right' | 'left';
   format?: (value: number) => string;
 }
 
@@ -115,7 +115,7 @@ export function CustomTable() {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
-                      const value = row[column.id];
+                      const value = row[column.id as keyof typeof row];
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.format && typeof value === 'number'
