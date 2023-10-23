@@ -3,12 +3,39 @@
 import Divider from '@mui/material/Divider';
 import { CustomTable } from "@/components/CustomTable";
 import { useState, useEffect } from 'react';
-import { Account, Transaction } from '@/services/types';
+import { Account, Column, Transaction } from '@/services/types';
 
 export default function AccountProfile({ params }: { params: { id: string } }) {
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [account, setAccount] = useState<Account | null>(null)
+  const [account, setAccount] = useState<Account | null>(null);
+  const columns: readonly Column[] = [
+    {
+      id: 'id',
+      label: 'ID',
+      minWidth: 100
+    },
+    {
+      id: 'source',
+      label: 'Source',
+      minWidth: 100
+    },
+    {
+      id: 'type',
+      label: 'Type',
+      minWidth: 100
+    },
+    {
+      id: 'status',
+      label: 'Status',
+      minWidth: 100
+    },
+    {
+      id: 'amount',
+      label: 'Amount',
+      minWidth: 100
+    }
+  ];
 
   useEffect(() => {
     fetch('/api/accounts?' + new URLSearchParams({
@@ -32,10 +59,7 @@ export default function AccountProfile({ params }: { params: { id: string } }) {
     <>
       <div>{account?.name}</div>
       <Divider />
-      {
-        transactions?.map(trans => (<div key={trans.id}>{trans.amount}</div>))
-      }
-      <CustomTable />
+      <CustomTable data={transactions} columns={columns}/>
     </>
   )
 }

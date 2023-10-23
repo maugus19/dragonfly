@@ -15,3 +15,13 @@ export type Transaction = {
   description?: string,
   status?: string
 }
+
+export interface Column {
+  id: string;
+  label: string;
+  minWidth?: number;
+  align?: 'right' | 'left';
+  format?: (value: number) => string;
+}
+
+export type CustomObject = {[key: string]: any};
