@@ -1,4 +1,5 @@
 import React from "react";
+import Avatar from '@mui/material/Avatar';
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAuthStore from "../context/authStore";
@@ -10,10 +11,17 @@ function Navbar() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>PWA Gastos</Typography>
+      <Avatar
+        alt="Dragonfly Ares"
+        src="./dragonfly.svg"
+        variant="square"
+      />
+      &nbsp;
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>Dragonfly Ares</Typography>
         {user ? (
           <>
             <Button color="inherit" component={Link} to="/">Inicio</Button>
+            <Button color="inherit" component={Link} to="/income">Ingresos</Button>
             <Button color="inherit" component={Link} to="/reports">Reportes</Button>
             <Button color="inherit" onClick={logout}>Cerrar sesión</Button>
           </>

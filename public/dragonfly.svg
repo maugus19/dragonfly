@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Dragonfly Wings -->
-    <ellipse cx="50" cy="60" rx="40" ry="15" transform="rotate(-10,50,60)"/>
-    <ellipse cx="150" cy="60" rx="40" ry="15" transform="rotate(10,150,60)"/>
-    <ellipse cx="50" cy="90" rx="40" ry="15" transform="rotate(10,50,90)"/>
-    <ellipse cx="150" cy="90" rx="40" ry="15" transform="rotate(-10,150,90)"/>
+<!--Dragonfly Wings-->
+  <ellipse cx="45" cy="58" rx="40" ry="15" transform="rotate(10,50,60)"/>
+  <ellipse cx="155" cy="58" rx="40" ry="15" transform="rotate(-10,150,60)"/>
+  <ellipse cx="45" cy="92" rx="40" ry="15" transform="rotate(-10,50,90)"/>
+  <ellipse cx="155" cy="92" rx="40" ry="15" transform="rotate(10,150,90)"/>
+<!--Dragonfly Body-->
+  <circle cx="100" cy="45" r="10"/>
+  <line x1="100" y1="93" x2="100" y2="140"/>
+<!--Dragonfly legs-->
 
-    <!-- Dragonfly Body -->
-    <line x1="100" y1="40" x2="100" y2="140" />
-    <circle cx="100" cy="30" r="10"/>
+  <path d="M 85 30 C 85 30, 80 40, 85 50" stroke="blue"/>
+  <path d="M 85 93 C 85 93, 80 93, 85 113" stroke="blue"/>
+  <path d="M 115 30 C 115 30, 120 40, 115 50" stroke="red"/>
+  <path d="M 115 93 C 115 93, 120 93, 115 113" stroke="red"/>
 
-    <!-- Ares Symbol: Shield -->
-    <circle cx="100" cy="110" r="15" stroke-width="4" />
-    
-    <!-- Ares Symbol: Spear -->
-    <line x1="100" y1="140" x2="100" y2="180" stroke-width="4"/>
-    <polygon points="95,180 105,180 100,195" fill="black"/>
+<!--Ares Symbol: Shield-->
+  <circle cx="100" cy="75" r="11" stroke-width="4" fill="black"/>
+  <line x1="95" y1="70" x2="105" y2="80" stroke="white"/>
+  <line x1="105" y1="70" x2="95" y2="80" stroke="white"/>
+<!--Ares Symbol: Spear-->
+  <line x1="100" y1="140" x2="100" y2="180" stroke-width="4"/>
+  <polygon points="95,180 105,180 100,195" fill="black"/>
 </svg>
