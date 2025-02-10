@@ -1,6 +1,6 @@
 import React from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
-import useExpenseStore from "../context/ExpenseContext";
+import useExpenseStore from "../context/FinanceStore";
 
 function ExpenseList() {
   const expenses = useExpenseStore((state) => state.expenses);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Typography } from "@mui/material";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
-import useExpenseStore from "../context/ExpenseContext";
+import useExpenseStore from "../context/FinanceStore";
 
 function Reports() {
   const expenses = useExpenseStore((state) => state.expenses);

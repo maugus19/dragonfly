@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import useExpenseStore from "../context/ExpenseContext";
+import useExpenseStore from "../context/FinanceStore";
 
 function IncomeForm() {
   const [name, setName] = useState("");
