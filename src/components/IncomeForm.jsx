@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import useExpenseStore from "../context/FinanceStore";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 function IncomeForm() {
   const [name, setName] = useState("");
@@ -17,11 +19,15 @@ function IncomeForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField label="Ingreso" value={name} onChange={(e) => setName(e.target.value)} fullWidth margin="normal" />
-      <TextField label="Cantidad" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} fullWidth margin="normal" />
-      <Button type="submit" variant="contained" color="primary">Agregar Ingreso</Button>
-    </form>
+    <Card>
+      <CardContent>
+      <form onSubmit={handleSubmit}>
+        <TextField label="Ingreso" value={name} onChange={(e) => setName(e.target.value)} fullWidth margin="normal" />
+        <TextField label="Cantidad" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} fullWidth margin="normal" />
+        <Button type="submit" variant="contained" color="primary">Agregar Ingreso</Button>
+      </form>
+      </CardContent>
+    </Card>
   );
 }
 
