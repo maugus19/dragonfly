@@ -9,7 +9,6 @@ const useFinanceStore = create((set, get) => ({
   fetchExpenses: async () => {
     const user = useAuthStore.getState().user;
     if (!user) return;
-    console.log('fetching')
     const { data, error } = await supabase
       .from('expenses')
       .select('*')
@@ -21,7 +20,6 @@ const useFinanceStore = create((set, get) => ({
     const user = useAuthStore.getState().user;
     if (!user) return;
 
-    console.log('add expense', expense);
     const { data, error } = await supabase
       .from('expenses')
       .insert([{ ...expense, user_id: user.id }])
