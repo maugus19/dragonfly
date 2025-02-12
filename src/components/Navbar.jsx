@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAuthStore from "../context/authStore";
 
-function Navbar() {
+function NavBar() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
@@ -33,4 +33,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavBar;
