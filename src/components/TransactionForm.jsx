@@ -2,21 +2,22 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Button, InputLabel, Select, MenuItem } from "@mui/material";
 import useExpenseStore from "../context/FinanceStore";
-import { getTypes } from "../context/api.service";
+import { getCategories } from "../context/api.service";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
-  const addExpense = useExpenseStore((state) => state.addExpense);
+  const addExpense = props.type === 'expenses' ? useExpenseStore((state) => state.addExpense) 
+  : useExpenseStore((state) => state.addIncome);
 
   useEffect(() => {
     load();
   }, []);
 
   const load = async () => {
-    setCategories(await getTypes());
+    setCategories(await getCategories());
   }
 
   const handleSubmit = (e) => {
@@ -34,7 +35,7 @@ function ExpenseForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField label="Gasto" value={name} onChange={(e) => setName(e.target.value)} fullWidth margin="normal" />
+      <TextField label="Transaccion" value={name} onChange={(e) => setName(e.target.value)} fullWidth margin="normal" />
       <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
       <Select
         labelId="demo-simple-select-label"
@@ -46,12 +47,12 @@ function ExpenseForm() {
       >
         {
           categories.map(item =>{
-            return <MenuItem value={item}>{item}</MenuItem>
+            return <MenuItem key={item} value={item}>{item}</MenuItem>
           })
         }
       </Select>
       <TextField label="Cantidad" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} fullWidth margin="normal" />
-      <Button type="submit" variant="contained" color="primary">Agregar Gasto</Button>
+      <Button type="submit" variant="contained" color="primary">Agregar transaccion</Button>
     </form>
   );
 }

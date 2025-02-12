@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Reports from "./pages/Reports";
 import Income from "./pages/Income";
 import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar";
 import useAuthStore from "./context/authStore";
 import useFinanceStore from "./context/FinanceStore";
 

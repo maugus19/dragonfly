@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
-import useExpenseStore from "../context/FinanceStore";
 
-function IncomeList() {
-  const incomes = useExpenseStore((state) => state.incomes);
+function TransactionList(props) {
+  const [incomes, setIncomes] = useState(props.data);
+
+  
+  useEffect(()=>{
+    setIncomes(props.data);
+  },[props.data]);
 
   return (
     <List>
@@ -16,4 +20,4 @@ function IncomeList() {
   );
 }
 
-export default IncomeList;
+export default TransactionList;

@@ -1,14 +1,17 @@
 import React from "react";
 import { Container, Typography } from "@mui/material";
-import IncomeForm from "../components/IncomeForm";
-import IncomeList from "../components/IncomeList";
+import TransactionForm from "../components/TransactionForm";
+import TransactionList from "../components/TransactionList";
+import useExpenseStore from "../context/FinanceStore";
 
 function Income() {
+  const incomes = useExpenseStore((state) => state.incomes);
+
   return (
     <Container>
       <Typography variant="h4">Registro de Ingresos</Typography>
-      <IncomeForm />
-      <IncomeList />
+      <TransactionForm />
+      <TransactionList data={incomes}/>
     </Container>
   );
 }
