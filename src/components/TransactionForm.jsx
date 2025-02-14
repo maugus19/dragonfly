@@ -4,7 +4,7 @@ import { TextField, Button, InputLabel, Select, MenuItem } from "@mui/material";
 import useExpenseStore from "../context/FinanceStore";
 import { getCategories } from "../context/api.service";
 
-function ExpenseForm(props) {
+export function TransactionForm(props) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
@@ -56,5 +56,3 @@ function ExpenseForm(props) {
     </form>
   );
 }
-
-export default ExpenseForm;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
 
-function TransactionList(props) {
+export function TransactionList(props) {
   const [incomes, setIncomes] = useState(props.data);
 
   
@@ -19,5 +19,3 @@ function TransactionList(props) {
     </List>
   );
 }
-
-export default TransactionList;

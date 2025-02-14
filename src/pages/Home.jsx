@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Typography } from "@mui/material";
-import TransactionForm from "../components/TransactionForm";
-import TransactionList from "../components/TransactionList";
+import {TransactionForm} from "../components/TransactionForm";
+import {TransactionList} from "../components/TransactionList";
 import useExpenseStore from "../context/FinanceStore";
 
 function Home() {
