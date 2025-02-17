@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Reports from "./pages/Reports";
 import Income from "./pages/Income";
 import Login from "./pages/Login";
-import {NavBar} from "./components/NavBar.jsx";
+//import {NavBar} from "./components/NavBar.jsx";
 import useAuthStore from "./context/authStore";
 import useFinanceStore from "./context/FinanceStore";
 
@@ -30,7 +30,6 @@ function App() {
   }, [user]);
   return (
     <>
-      <NavBar />
       <br />
       <Routes>
         <Route path="/login" element={<Login />} />
