@@ -9,12 +9,10 @@
   <circle cx="100" cy="45" r="10"/>
   <line x1="100" y1="93" x2="100" y2="140"/>
 <!--Dragonfly legs-->
-
-  <path d="M 85 30 C 85 30, 80 40, 85 50" stroke="blue"/>
-  <path d="M 85 93 C 85 93, 80 93, 85 113" stroke="blue"/>
-  <path d="M 115 30 C 115 30, 120 40, 115 50" stroke="red"/>
-  <path d="M 115 93 C 115 93, 120 93, 115 113" stroke="red"/>
-
+  <path d="M 85 30 C 85 30, 80 40, 85 50"/>
+  <path d="M 90 93 C 90 93, 85 93, 90 113"/>
+  <path d="M 115 30 C 115 30, 120 40, 115 50"/>
+  <path d="M 110 93 C 110 93, 115 93, 110 113"/>
 <!--Ares Symbol: Shield-->
   <circle cx="100" cy="75" r="11" stroke-width="4" fill="black"/>
   <line x1="95" y1="70" x2="105" y2="80" stroke="white"/>
