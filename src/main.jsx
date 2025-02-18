@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-i//mport * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+//import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import useAuthStore from "./context/authStore";
 import { registerSW } from 'virtual:pwa-register';
 import { LocalizationProvider } from '@mui/x-date-pickers';
