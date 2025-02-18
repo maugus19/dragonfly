@@ -16,7 +16,7 @@ function PrivateRoute({ children }) {
 function App() {
 
   const { user, checkUser } = useAuthStore();
-  const { fetchExpenses, fetchIncomes } = useFinanceStore();
+  const { fetchTransactions } = useFinanceStore();
 
   useEffect(() => {
     checkUser(); // Verifica si hay un usuario autenticado
@@ -24,8 +24,8 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      fetchExpenses();
-      fetchIncomes();
+      fetchTransactions('expenses');
+      fetchTransactions('incomes');
     }
   }, [user]);
   return (

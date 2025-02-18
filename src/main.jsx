@@ -5,6 +5,8 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import useAuthStore from "./context/authStore";
 import { registerSW } from 'virtual:pwa-register';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const updateSW = registerSW({
   onNeedRefresh() {
@@ -33,7 +35,9 @@ function Root() {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Root />
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Root />
+    </LocalizationProvider>
   </React.StrictMode>
 );
 

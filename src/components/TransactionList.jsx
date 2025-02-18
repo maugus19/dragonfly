@@ -4,20 +4,20 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
 export function TransactionList(props) {
-  const [incomes, setIncomes] = useState(props.data);
+  const [transactions, setTransactions] = useState(props.data);
 
 
   useEffect(() => {
-    setIncomes(props.data);
+    setTransactions(props.data);
   }, [props.data]);
 
   return (
     <List>
-      {incomes.map((income, index) => (
-        <Card>
+      {transactions.map((transaction, index) => (
+        <Card key={index}>
           <CardContent>
-            <ListItem key={index}>
-              <ListItemText primary={income.name} secondary={`$${income.amount}`} />
+            <ListItem >
+              <ListItemText primary={transaction.name} secondary={`$${transaction.amount}`}>{transaction.description}</ListItemText>
             </ListItem>
           </CardContent>
         </Card>

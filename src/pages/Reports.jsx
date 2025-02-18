@@ -23,14 +23,14 @@ function Reports() {
             <CustomBarChart
             title={'Gastos'}
             data={expenses}
-            xKey={'name'}
+            xKey={'category'}
             barKey={'amount'}
             />
           </Grid>
           <Grid size={6}>
             <CustomBarChart
               title='Ingresos'
-              xKey='name'
+              xKey='category'
               barKey='amount'
               data={incomes}
             />

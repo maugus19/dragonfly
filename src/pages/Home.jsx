@@ -12,6 +12,7 @@ function Home() {
   return (
     <Container>
       <Typography variant="h4">Registro de Gastos</Typography>
+      &nbsp;
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid size={4}>

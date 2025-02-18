@@ -5,14 +5,22 @@ import useExpenseStore from "../context/FinanceStore";
 import { getCategories } from "../context/api.service";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Divider from '@mui/material/Divider';
+import CardActions from '@mui/material/CardActions';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
 export function TransactionForm(props) {
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
-  const addExpense = props.type === 'expenses' ? useExpenseStore((state) => state.addExpense)
-    : useExpenseStore((state) => state.addIncome);
+  const [description, setDescription] = useState('')
+  const [recurring, setRecurring] = useState(false);
+  const [date, setDate] = useState(new Date());
+
+  const addTransaction = useExpenseStore((state) => state.addTransaction);
 
   useEffect(() => {
     load();
@@ -22,31 +30,44 @@ export function TransactionForm(props) {
     setCategories(await getCategories());
   }
 
+  const clearForm = () => {
+    setName('');
+    setAmount('');
+    setCategory('');
+    setDescription('');
+    setRecurring(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && amount) {
-      addExpense({ name, amount: parseFloat(amount) });
-      setName("");
-      setAmount("");
+      addTransaction({ 
+        name,
+        amount: parseFloat(amount) * (props.type === 'expenses'? -1 : 1),
+        description,
+        recurring,
+        category,
+        date
+      }, props.type);
+      clearForm();
     }
   };
-
-  const handleCategory = (event) => {
-    setCategory(event.target.value)
-  }
 
   return (
     <form onSubmit={handleSubmit}>
       <Card>
         <CardContent>
+          <TextField label="Cantidad" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} fullWidth margin="normal" />
           <TextField label="Transaccion" value={name} onChange={(e) => setName(e.target.value)} fullWidth margin="normal" />
-          <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+          <TextField label="Descripcion" value={description} onChange={(e) => setDescription(e.target.value)} fullWidth margin="normal" />
+          <FormControlLabel control={<Switch onChange={(e) => {
+            setRecurring(e.target.checked);
+            }} value={recurring}/>} label="Recurrente" />
+          <InputLabel>Categoria</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
             value={category}
             label="Categoria"
-            onChange={handleCategory}
+            onChange={(e) => setCategory(e.target.value)}
             fullWidth
           >
             {
@@ -55,8 +76,11 @@ export function TransactionForm(props) {
               })
             }
           </Select>
-          <TextField label="Cantidad" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} fullWidth margin="normal" />
-          <Button type="submit" variant="contained" color="primary">Agregar transaccion</Button>
+          <DatePicker closeOnSelect onChange={(e)=> setDate(e)} value={date}/>
+          <Divider />
+          <CardActions>
+            <Button type="submit" variant="contained" color="primary">Agregar transaccion</Button>
+          </CardActions>
         </CardContent>
       </Card>
     </form>

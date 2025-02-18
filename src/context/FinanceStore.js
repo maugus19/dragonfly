@@ -6,68 +6,62 @@ const useFinanceStore = create((set, get) => ({
   expenses: [],
   incomes: [],
 
-  fetchExpenses: async () => {
+  fetchTransactions: async (type) => {
     const user = useAuthStore.getState().user;
     if (!user) return;
-    const { data, error } = await supabase
-      .from('expenses')
+
+    const query = supabase
+      .from('transactions')
       .select('*')
       .eq('user_id', user.id);
-    if (!error) set({ expenses: data });
-  },
+    
+    type === 'expenses' ? query.lt('amount', 0) : query.gt('amount', 0)
+    
 
-  addExpense: async (expense) => {
+    const { data, error } = await query;
+    if (!error) {
+      if (type === 'expenses') {
+        set({ expenses: data });
+      }
+      else {
+        set({ incomes: data });
+      }
+    }
+  },
+  addTransaction: async (transaction, type) => {
     const user = useAuthStore.getState().user;
     if (!user) return;
 
     const { data, error } = await supabase
-      .from('expenses')
-      .insert([{ ...expense, user_id: user.id }])
+      .from('transactions')
+      .insert([{ ...transaction, user_id: user.id }])
       .select();
     console.log(error);
-    if (!error) set((state) => ({ expenses: [...state.expenses, ...data] }));
+    if (!error) {
+      if (type === 'expenses') {
+        set((state) => ({ expenses: [...state.expenses, ...data] }));
+      }
+      else {
+        set((state) => ({ incomes: [...state.incomes, ...data] }));
+      }
+    }
   },
-
-  removeExpense: async (id) => {
+  removeTransaction: async(id, type) => {
     const user = useAuthStore.getState().user;
     if (!user) return;
     const { error } = await supabase
-      .from('expenses')
+      .from('transactions')
       .delete()
       .eq('id', id)
       .eq('user_id', user.id);
-    if (!error) set((state) => ({ expenses: state.expenses.filter((exp) => exp.id !== id) }));
-  },
-
-  fetchIncomes: async () => {
-    const user = useAuthStore.getState().user;
-    if (!user) return;
-    const { data, error } = await supabase
-      .from('incomes')
-      .select('*')
-      .eq('user_id', user.id);
-    if (!error) set({ incomes: data });
-  },
-
-  addIncome: async (income) => {
-    const user = useAuthStore.getState().user;
-    if (!user) return;
-    const { data, error } = await supabase
-      .from('incomes')
-      .insert([{ ...income, user_id: user.id }])
-      .select();
-    if (!error) set((state) => ({ incomes: [...state.incomes, ...data] }));
-  },
-
-  removeIncome: async (id) => {
-    const user = useAuthStore.getState().user;
-    if (!user) return;
-    const { error } = await supabase
-      .from('incomes')
-      .delete()
-      .eq('id', id)
-      .eq('user_id', user.id);
-    if (!error) set((state) => ({ incomes: state.incomes.filter((inc) => inc.id !== id) }));
+      if (!error) {
+        if (type === 'expenses') {
+          set((state) => ({ expenses: state.expenses.filter((exp) => exp.id !== id) }))
+        }
+        else {
+          set((state) => ({ incomes: state.incomes.filter((exp) => exp.id !== id) }))
+        }
+      }
   }
 }));
 
