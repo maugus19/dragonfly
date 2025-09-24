@@ -3,8 +3,6 @@ import type { NextRequest } from 'next/server'
  
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  console.log(request);
-
   if (request.url.includes('/api/v1/vera')) {
     return NextResponse.redirect(new URL('https://hugs.company/hug/DR0OfTzNS4'))
   }
