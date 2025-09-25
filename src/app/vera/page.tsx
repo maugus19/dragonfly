@@ -8,37 +8,38 @@ import {
   LinearProgress,
   Button,
   Snackbar,
-  IconButton,
 } from "@mui/material";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import IconButton from '@mui/material/IconButton';
+import { useRef, useState } from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
+import { getRandomMessage } from "./service";
 
 export default function HomePage() {
-  const [message, setMessage] = useState<string>("Tiene un mensaje para ti 💌");
+  const audioRef = useRef<HTMLAudioElement>(null);
+  //resources
   const imageUrl = "/image.webp";
   const musicUrl = "/yellow-flowers.mp3";
 
-  const [progress, setProgress] = useState(0);
   const loadingMessage = "Pequeño Recordatorio";
-  const finalMessage = "Ten un feliz dia (valido solo para ti)";
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const [finalMessage] = useState(getRandomMessage());
 
-  // Toast + confeti
+  const [message, setMessage] = useState<string>("Mau tiene un mensaje para ti 💌");
+  const [progress, setProgress] = useState(0);
+  const [playing, setPlaying] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const { width, height } = useWindowSize();
 
-  const handleToggleMusic = () => {
-    setPlaying(!playing);
+  const handleToggleMusic = (value?: boolean) => {
+    setPlaying(value === true ? value : !playing);
 
     if (audioRef.current) {
-      if (!playing) {
+      if (!playing || value === true) {
         audioRef.current.play();
       } else {
         audioRef.current.pause();
@@ -48,7 +49,7 @@ export default function HomePage() {
 
   const handleOnClick = () => {
     setMessage('Cargando...');
-    handleToggleMusic();
+    handleToggleMusic(true);
     setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress === 100) {
@@ -73,8 +74,11 @@ export default function HomePage() {
     <Container maxWidth="sm" sx={{ mt: 4 }}>
 
       <div style={{ justifySelf: "center", textAlign: "center" }}>
-        <IconButton onClick={handleToggleMusic}>
-          {playing ? <MusicNoteIcon sx={{ color: "white", fontSize: 30 }} /> : <MusicOffIcon sx={{ color: "white", fontSize: 30 }} />}
+        <IconButton onClick={()=>handleToggleMusic()}>
+          {playing ?
+            <MusicNoteIcon sx={{ color: "white", fontSize: 30 }} /> :
+            <MusicOffIcon sx={{ color: "white", fontSize: 30 }} />
+          }
         </IconButton>
       </div>
 
